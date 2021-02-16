@@ -11,22 +11,14 @@ next.addEventListener("click", () => {
   if (currentActive > circles.length) {
     currentActive = circles.length;
   }
-  console.log(currentActive);
 
-  if (currentActive > 1) {
-    prev.disabled = false;
-  }
   update();
 });
 
 prev.addEventListener("click", () => {
   currentActive--;
-  if (currentActive < 1) {
-    currentActive = 1;
-    prev.disabled = true;
-  }
+
   update();
-  console.log(currentActive);
 });
 
 function update() {
@@ -41,4 +33,13 @@ function update() {
   const actives = document.querySelectorAll(".active");
   progress.style.width =
     ((actives.length - 1) / (circles.length - 1)) * 100 + "%";
+
+  if (currentActive === 1) {
+    prev.disabled = true;
+  } else if (currentActive === circles.length) {
+    next.disabled = true;
+  } else {
+    prev.disabled = false;
+    next.disabled = false;
+  }
 }
